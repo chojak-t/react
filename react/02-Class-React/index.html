@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Komponenty React jako funkcje</title>
+	<title>Komponenty React jako klasy</title>
 	<script src="https://unpkg.com/react/umd/react.development.js"></script>
 	<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/babel-standalone/babel.js"></script>
@@ -20,13 +20,9 @@
 </div>
 
   <script type="text/babel">
-	ReactDOM.render(
-		<App />,
-		document.getElementById("app")
-	);
-	
-	function AppHeader() {
-		return(
+	class AppHeader extends React.Component {
+		render() {
+			return(
 			<div>
 				<nav className="navbar navbar-expand-md navbar-dark bg-dark">
 		
@@ -50,13 +46,15 @@
 					</ul>
 				</nav>
 			</div>
-		);
+			);
+		}
 	}
-	
-	function ContactList() {
-		return(
-			<div>
-							  <ul className="list-group list-group-item-action list-group-flush w-25 mx-auto">
+		
+	class ContactList extends React.Component {
+		render() {
+			return(
+					<div>
+							<ul className="list-group list-group-item-action list-group-flush w-25 mx-auto">
 								<ContactItem
 									avatar="typeofweb1"
 									name="Tomek"
@@ -72,14 +70,17 @@
 									name="Ala"
 									department="IT"
 								/>
-							  </ul>
-			</div>
-		);
+							 </ul>
+					</div>
+			);
+		}
 	}
 	
-	function ContactItem({avatar, name, department}) {
-		const imgUrl = `img/${avatar}.png`;
-		return(
+	class ContactItem extends React.Component {
+		render() {
+			const {avatar, name, department} = this.props;
+			const imgUrl = `img/${avatar}.png`;
+			return (
 			<div>
 				<li className="list-group-item list-group-item-action list-group-item-dark">
 				<div className="card flex-row flex-wrap">
@@ -92,27 +93,35 @@
 					</div>
 				</div>
 			  </li>
-			</div>
-		);
+			 </div>
+			);
+		}
 	}
 	
-	function App() {
-		return(
-		<div>
-			<AppHeader />
-			<div className="container-fluid">
-	
-				<div className="jumbotron">
-					<h1 className="display-4">React</h1>
-					<p className="lead">Lista kontaktów - komponenty react jako funkcje - Stateless Functional Component</p>
-					<hr className="my-4"/>
-					<p>Szablon w oparciu o Bootstrap</p>
+	class App extends React.Component {
+		render() {
+			return(
+			<div>
+				<AppHeader />
+				<div className="container-fluid">
+		
+					<div className="jumbotron">
+						<h1 className="display-4">React</h1>
+						<p className="lead">Lista kontaktów - komponenty react jako klasy</p>
+						<hr className="my-4"/>
+						<p>Szablon w oparciu o Bootstrap</p>
+					</div>
+					<ContactList />
 				</div>
-				<ContactList />
 			</div>
-		</div>
-		);
+			);
+		}
 	}
+	
+	ReactDOM.render(
+		<App />,
+		document.getElementById("app")
+	);
 	
   </script>
 </body>

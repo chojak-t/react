@@ -1,1 +1,3 @@
-# react
+# React.js
+
+* Stateless Functional Component

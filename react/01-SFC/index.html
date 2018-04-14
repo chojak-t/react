@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Komponenty React jako funkcje</title>
+	<script src="https://unpkg.com/react/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/babel-standalone/babel.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<div id="app">
+</div>
+
+  <script type="text/babel">
+	ReactDOM.render(
+		<App />,
+		document.getElementById("app")
+	);
+	
+	function AppHeader() {
+		return(
+			<div>
+				<nav className="navbar navbar-expand-md navbar-dark bg-dark">
+		
+					<a className="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png" width="71px" height="50px"/></a>
+					<span className="navbar-text">Lista kontaktów</span>
+					
+					<ul className="navbar-nav">
+					<li className="nav-item">
+						<a className="nav-link" href="#">Link 1</a>
+					</li>
+					<li className="nav-item">
+						<a className="nav-link" href="#">Link 2</a>
+					</li>
+					<li className="nav-item">
+						<a className="nav-link" href="#">Link 3</a>
+					</li>
+					<li className="nav-item">
+						<a className="nav-link" href="#">Link 4	</a>
+					</li>
+					<button className="btn btn-success" type="button">Dodaj</button>
+					</ul>
+				</nav>
+			</div>
+		);
+	}
+	
+	function ContactList() {
+		return(
+			<div>
+							  <ul className="list-group list-group-item-action list-group-flush w-25 mx-auto">
+								<ContactItem
+									avatar="typeofweb1"
+									name="Tomek"
+									department="IT"
+								/>
+								<ContactItem
+									avatar="typeofweb2"
+									name="Kasia"
+									department="IT"
+								/>
+								<ContactItem
+									avatar="typeofweb4"
+									name="Ala"
+									department="IT"
+								/>
+							  </ul>
+			</div>
+		);
+	}
+	
+	function ContactItem({avatar, name, department}) {
+		const imgUrl = `img/${avatar}.png`;
+		return(
+			<div>
+				<li className="list-group-item list-group-item-action list-group-item-dark">
+				<div className="card flex-row flex-wrap">
+					<div className="card-header align-self-center" style={{"borderBottom":"none","backgroundColor":"white"}}>
+						<img src={imgUrl} alt="avatar" className="rounded image mx-auto d-block" />
+					</div>
+					<div className="card-body">
+						<h4 className="card-title">{name}</h4>
+						<p className="card-text">{department}</p>
+					</div>
+				</div>
+			  </li>
+			</div>
+		);
+	}
+	
+	function App() {
+		return(
+		<div>
+			<AppHeader />
+			<div className="container-fluid">
+	
+				<div className="jumbotron">
+					<h1 className="display-4">React</h1>
+					<p className="lead">Lista kontaktów - komponenty react jako funkcje - Stateless Functional Component</p>
+					<hr className="my-4"/>
+					<p>Szablon w oparciu o Bootstrap</p>
+				</div>
+				<ContactList />
+			</div>
+		</div>
+		);
+	}
+	
+  </script>
+</body>
+
+</html>

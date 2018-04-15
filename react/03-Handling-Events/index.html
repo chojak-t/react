@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>Komponenty React jako klasy</title>
+	<title>Handling events in React</title>
 	<script src="https://unpkg.com/react/umd/react.development.js"></script>
 	<script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
 	<script src="https://unpkg.com/babel-standalone/babel.js"></script>
@@ -77,12 +77,18 @@
 	}
 	
 	class ContactItem extends React.Component {
+		constructor(props) {
+			super(props);
+
+			// This binding is necessary to make `this` work in the callback
+			this.onClickHandler = this.onClickHandler.bind(this);
+		}
 		render() {
 			const {avatar, name, department} = this.props;
 			const imgUrl = `img/${avatar}.png`;
 			return (
 			<div>
-				<li className="list-group-item list-group-item-action list-group-item-dark">
+				<li onClick={this.onClickHandler} className="list-group-item list-group-item-action list-group-item-dark">
 				<div className="card flex-row flex-wrap">
 					<div className="card-header align-self-center" style={{"borderBottom":"none","backgroundColor":"white"}}>
 						<img src={imgUrl} alt="avatar" className="rounded image mx-auto d-block" />
@@ -95,6 +101,10 @@
 			  </li>
 			 </div>
 			);
+		}
+		
+		onClickHandler() {
+			alert(`Kliknięto ${this.props.name}`);
 		}
 	}
 	
